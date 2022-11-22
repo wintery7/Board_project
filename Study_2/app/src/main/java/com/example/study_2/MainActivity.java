@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         if(user == null){
             startLoginActivity();
         }else{
+
+            startCameraActivity();
             DocumentReference docRef = db.collection("cities").document("SF");
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             if(document.getData() == null){
                             }
                         } else {
@@ -73,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void startMemberInitActivity(){
         Intent intent = new Intent(this,MemberInitActivity.class);
+        startActivity(intent);
+    }
+
+    private void startCameraActivity(){
+        Intent intent = new Intent(this,CameraActivity.class);
         startActivity(intent);
     }
 }
